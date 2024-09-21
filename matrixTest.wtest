@@ -1,9 +1,34 @@
+import matrix.*
 
 
-describe "group of tests " {
+describe "Matrix " {
 
-  test "test 01" {
-    assert.equals(100, 50+50)
+  test "La cantidad de pasajeros es 3" {
+    assert.equals(3,nave.cantidadPasajeros())
   }
-
+  test "El pasajero con mas vitalidad es Neo" {
+    assert.equals(neo,nave.mayorVitalidad())
+  }
+  test "Al iniciar, la nave se encuentra con la vitalidad equilibrada" {
+    assert.that(nave.estaEquilibrada())
+  }
+  test "Al iniciar, el elegido está en el nave" {
+    assert.that(nave.estaElElegido())
+  }
+  test "Cuando la nave choca, todos sus pasajeros saltan para salvarse y se van de la nave, por lo tanto
+    la nave queda vacía. La vitalidad de neo queda en 5, la de morfeo en 7 y trinity no cambia" {
+    nave.chocar()
+    assert.equals(5,neo.vitalidad())
+    assert.equals(7,morfeo.vitalidad())
+    assert.equals(0,trinity.vitalidad())
+    assert.that(nave.pasajeros().isEmpty())
+  }
+  test "Cuando la nave acelera, todos sus pasajeros, excepto el elegido, saltan de alegría y permanecen
+   en la nave. La vitalidad de neo queda igual, la de morfeo en 7 y trinity no cambia" {
+    nave.acelerar()
+    assert.equals(10,neo.vitalidad())
+    assert.equals(7,morfeo.vitalidad())
+    assert.equals(0,trinity.vitalidad())
+    assert.equals([neo,morfeo,trinity],nave.pasajeros())
+  }
 }
